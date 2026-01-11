@@ -1,7 +1,7 @@
 
 import streamlit as st
 import pandas as pd
-import seaborn as sns
+import seaborn
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder,StandardScaler
 
@@ -36,7 +36,7 @@ with st.expander("View Data Summary"):
 
     st.write("Booking: (Canceled vs not Canceled):")
     fig,ax=plt.subplots(figsize=(6,3))
-    sns.countplot(x='is_canceled',data=df,palette='viridis')
+    seaborn.countplot(x='is_canceled',data=df,palette='viridis')
     st.pyplot(fig)
 
 #Data cleaning
@@ -72,12 +72,12 @@ with st.container():
     with c1:
         st.write("Before Cleaning:")
         fig1,ax1=plt.subplots()
-        sns.boxplot(x=df_processed['adr'],color='salmon')
+        seaborn.boxplot(x=df_processed['adr'],color='salmon')
         st.pyplot(fig1)
     with c2:
         st.write("After Cleaning:")
         fig2,ax2=plt.subplots()
-        sns.boxplot(x=df_no_outliers['adr'],color='skyblue')
+        seaborn.boxplot(x=df_no_outliers['adr'],color='skyblue')
         st.pyplot(fig2)
 
 #Encoding & Scaling
@@ -108,7 +108,8 @@ st.header("5️⃣ Correlation Matrix (Heatmap)")
 with st.container():
     fig_corr,ax_corr=plt.subplots(figsize=(10,6))
     numeric_df=df_no_outliers.select_dtypes(include=['number'])
-    sns.heatmap(numeric_df.corr(),annot=False,cmap='coolwarm',ax=ax_corr)
+    seaborn.heatmap(numeric_df.corr(),annot=False,cmap='coolwarm',ax=ax_corr)
     st.pyplot(fig_corr)
 
 st.sidebar.success("شهد بطيحة")
+
